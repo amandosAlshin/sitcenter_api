@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -45,15 +45,15 @@ router.post('/userlist',
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
+  _regenerator["default"].mark(function _callee(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db.default.query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date,ins_by_id FROM users WHERE delete_status=0');
+            return _db["default"].query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date,ins_by_id FROM users WHERE delete_status=0');
 
           case 3:
             data = _context.sent;
@@ -103,10 +103,10 @@ router.post('/useradd',
 function () {
   var _ref2 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
+  _regenerator["default"].mark(function _callee2(req, res) {
     var ins_date, data, _data;
 
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -163,7 +163,7 @@ function () {
             }
 
             _context2.next = 13;
-            return _db.default.query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","","' + ins_date + '","' + req.user.user_id + '")');
+            return _db["default"].query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","","' + ins_date + '","' + req.user.user_id + '")');
 
           case 13:
             data = _context2.sent;
@@ -172,7 +172,7 @@ function () {
 
           case 16:
             _context2.next = 18;
-            return _db.default.query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","' + req.body.id_branch + '","' + ins_date + '","' + req.user.user_id + '")');
+            return _db["default"].query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","' + req.body.id_branch + '","' + ins_date + '","' + req.user.user_id + '")');
 
           case 18:
             _data = _context2.sent;
@@ -208,15 +208,15 @@ router.post('/userinfo',
 function () {
   var _ref3 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(req, res) {
+  _regenerator["default"].mark(function _callee3(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee3$(_context3) {
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
             _context3.next = 3;
-            return _db.default.query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date FROM users WHERE id="' + req.body.user_id + '"');
+            return _db["default"].query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date FROM users WHERE id="' + req.body.user_id + '"');
 
           case 3:
             data = _context3.sent;
@@ -266,15 +266,15 @@ router.post('/userdelete',
 function () {
   var _ref4 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee4(req, res) {
+  _regenerator["default"].mark(function _callee4(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee4$(_context4) {
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.prev = 0;
             _context4.next = 3;
-            return _db.default.query('UPDATE users set delete_status=1 WHERE id="' + req.body.user_id + '"');
+            return _db["default"].query('UPDATE users set delete_status=1 WHERE id="' + req.body.user_id + '"');
 
           case 3:
             data = _context4.sent;
@@ -304,4 +304,4 @@ function () {
   };
 }());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;

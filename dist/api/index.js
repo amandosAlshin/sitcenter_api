@@ -8,43 +8,43 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "v1", {
   enumerable: true,
   get: function get() {
-    return _v.default;
+    return _v["default"];
   }
 });
 Object.defineProperty(exports, "user", {
   enumerable: true,
   get: function get() {
-    return _user.default;
+    return _user["default"];
   }
 });
 Object.defineProperty(exports, "main", {
   enumerable: true,
   get: function get() {
-    return _main.default;
+    return _main["default"];
   }
 });
 Object.defineProperty(exports, "tickets", {
   enumerable: true,
   get: function get() {
-    return _tickets.default;
+    return _tickets["default"];
   }
 });
 Object.defineProperty(exports, "services", {
   enumerable: true,
   get: function get() {
-    return _services.default;
+    return _services["default"];
   }
 });
 Object.defineProperty(exports, "employee", {
   enumerable: true,
   get: function get() {
-    return _employee.default;
+    return _employee["default"];
   }
 });
 Object.defineProperty(exports, "branch_list", {
   enumerable: true,
   get: function get() {
-    return _branch_list.default;
+    return _branch_list["default"];
   }
 });
 

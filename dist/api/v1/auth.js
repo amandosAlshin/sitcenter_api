@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -29,16 +29,16 @@ router.post('/login',
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
+  _regenerator["default"].mark(function _callee(req, res) {
     var ok, data, token;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             ok = false;
             _context.prev = 1;
             _context.next = 4;
-            return _db.default.query('SELECT id,login,password,role,id_branch,delete_status FROM users WHERE delete_status = 0 and login="' + req.body.login + '"');
+            return _db["default"].query('SELECT id,login,password,role,id_branch,delete_status FROM users WHERE delete_status = 0 and login="' + req.body.login + '"');
 
           case 4:
             data = _context.sent;
@@ -59,7 +59,7 @@ function () {
             }));
 
           case 10:
-            token = _jsonwebtoken.default.sign({
+            token = _jsonwebtoken["default"].sign({
               user_id: data[0].id,
               login: data[0].login,
               id_branch: data[0].id_branch,
@@ -111,8 +111,8 @@ router.post('/usercheck',
 function () {
   var _ref2 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+  _regenerator["default"].mark(function _callee2(req, res) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -137,4 +137,4 @@ function () {
   };
 }());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;

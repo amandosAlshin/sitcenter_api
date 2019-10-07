@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -34,9 +34,9 @@ router.post('/tickets_list',
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
+  _regenerator["default"].mark(function _callee(req, res) {
     var where, branches, data;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -54,7 +54,7 @@ function () {
             }
 
             _context.next = 5;
-            return _db.default.query('SELECT' + '`id`,`id` as `key`,`eventid`,`ticketno`,`starttime`,`iin`,`redirected`,`targetoperatorid`,' + '`state`,`servover`,`waitover`,`startservtime`,`stopservtime`,' + '`additionalstatus`,`operator`,`windownum`,`rolestring`,`autocode`,' + '`idoperator`,`idqueue`,`rating`,`opinion`,`idbranch`,' + '`servicename`,`picnum`,`time`,`last`,`PreServOver`,`PreWaitOver`' + 'FROM facts ' + where + '');
+            return _db["default"].query('SELECT' + '`id`,`id` as `key`,`eventid`,`ticketno`,`starttime`,`iin`,`redirected`,`targetoperatorid`,' + '`state`,`servover`,`waitover`,`startservtime`,`stopservtime`,' + '`additionalstatus`,`operator`,`windownum`,`rolestring`,`autocode`,' + '`idoperator`,`idqueue`,`rating`,`opinion`,`idbranch`,' + '`servicename`,`picnum`,`time`,`last`,`PreServOver`,`PreWaitOver`' + 'FROM facts ' + where + '');
 
           case 5:
             data = _context.sent;
@@ -100,4 +100,4 @@ function () {
   };
 }());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;
