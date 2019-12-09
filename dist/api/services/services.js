@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -34,15 +34,15 @@ router.post('/services_list',
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
+  _regenerator["default"].mark(function _callee(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db.default.query('SELECT `id`,`F_ID`,`F_NAME`,`F_WORK_NAME`,`F_ID_PARENT`,`F_F_2`,`F_QWAIT_TIME`,`F_MAX_SERV_TIME` FROM services_list');
+            return _db["default"].query('SELECT `id`,`F_ID`,`F_NAME`,`F_WORK_NAME`,`F_ID_PARENT`,`F_F_2`,`F_QWAIT_TIME`,`F_MAX_SERV_TIME` FROM services_list');
 
           case 3:
             data = _context.sent;
@@ -92,15 +92,15 @@ router.post('/role-list',
 function () {
   var _ref2 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
+  _regenerator["default"].mark(function _callee2(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
             _context2.next = 3;
-            return _db.default.query('SELECT `id`,`F_ID`,`F_NAME`,`F_QUEUE_ID` FROM role');
+            return _db["default"].query('SELECT `id`,`F_ID`,`F_NAME`,`F_QUEUE_ID` FROM role');
 
           case 3:
             data = _context2.sent;
@@ -146,4 +146,4 @@ function () {
   };
 }());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;

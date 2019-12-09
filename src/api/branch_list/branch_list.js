@@ -29,7 +29,6 @@ router.post('/branch_list', async (req, res) => {
 
 });
 router.post('/window-state', async (req, res) => {
-
   try{
     var where = '';
     if(parseInt(req.user.role,10) !== 0){

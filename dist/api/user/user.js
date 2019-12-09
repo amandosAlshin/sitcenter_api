@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -45,15 +45,15 @@ router.post('/userlist',
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
+  _regenerator["default"].mark(function _callee(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db.default.query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date,ins_by_id FROM users WHERE delete_status=0');
+            return _db["default"].query('SELECT id,login,password,sign_in_date,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date,ins_by_id FROM users WHERE delete_status=0');
 
           case 3:
             data = _context.sent;
@@ -103,10 +103,10 @@ router.post('/useradd',
 function () {
   var _ref2 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
-    var ins_date, data, _data;
+  _regenerator["default"].mark(function _callee2(req, res) {
+    var state_n, ins_date, data, _data;
 
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -154,49 +154,55 @@ function () {
             }));
 
           case 8:
-            _context2.prev = 8;
+            state_n = 0;
+
+            if (req.body.state_n) {
+              state_n = 1;
+            }
+
+            _context2.prev = 10;
             ins_date = moment().format('YYYY-DD-MM h:mm:ss');
 
             if (!(req.body.role === 0)) {
-              _context2.next = 16;
+              _context2.next = 18;
               break;
             }
 
-            _context2.next = 13;
-            return _db.default.query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","","' + ins_date + '","' + req.user.user_id + '")');
+            _context2.next = 15;
+            return _db["default"].query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","","' + ins_date + '","' + req.user.user_id + '")');
 
-          case 13:
+          case 15:
             data = _context2.sent;
-            _context2.next = 19;
+            _context2.next = 21;
             break;
 
-          case 16:
-            _context2.next = 18;
-            return _db.default.query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '",' + '"' + req.body.role + '","' + req.body.id_branch + '","' + ins_date + '","' + req.user.user_id + '")');
-
           case 18:
+            _context2.next = 20;
+            return _db["default"].query('INSERT INTO users (login,password,email,send_n,role,id_branch,ins_date,ins_by_id) values ("' + req.body.login + '","' + req.body.password + '","' + req.body.email + '","' + state_n + '",' + '"' + req.body.role + '","' + req.body.id_branch + '","' + ins_date + '","' + req.user.user_id + '")');
+
+          case 20:
             _data = _context2.sent;
 
-          case 19:
+          case 21:
             return _context2.abrupt("return", res.status(200).send({
               type: "ok",
               msg: 'Пользователь удачно добавлен'
             }));
 
-          case 22:
-            _context2.prev = 22;
-            _context2.t0 = _context2["catch"](8);
+          case 24:
+            _context2.prev = 24;
+            _context2.t0 = _context2["catch"](10);
             return _context2.abrupt("return", res.status(401).send({
               status: false,
               message: _context2.t0.message
             }));
 
-          case 25:
+          case 27:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[8, 22]]);
+    }, _callee2, null, [[10, 24]]);
   }));
 
   return function (_x3, _x4) {
@@ -208,15 +214,15 @@ router.post('/userinfo',
 function () {
   var _ref3 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(req, res) {
+  _regenerator["default"].mark(function _callee3(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee3$(_context3) {
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
             _context3.next = 3;
-            return _db.default.query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date FROM users WHERE id="' + req.body.user_id + '"');
+            return _db["default"].query('SELECT id,login,email,send_n,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date FROM users WHERE id="' + req.body.user_id + '"');
 
           case 3:
             data = _context3.sent;
@@ -261,47 +267,95 @@ function () {
     return _ref3.apply(this, arguments);
   };
 }());
-router.post('/userdelete',
+router.post('/useredit',
 /*#__PURE__*/
 function () {
   var _ref4 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee4(req, res) {
-    var data;
-    return _regenerator.default.wrap(function _callee4$(_context4) {
+  _regenerator["default"].mark(function _callee4(req, res) {
+    var state_n, data;
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
-            return _db.default.query('UPDATE users set delete_status=1 WHERE id="' + req.body.user_id + '"');
+            state_n = 0;
 
-          case 3:
+            if (req.body.send_n === "true") {
+              state_n = 1;
+            }
+
+            _context4.prev = 2;
+            _context4.next = 5;
+            return _db["default"].query('UPDATE users set login="' + req.body.login + '",password="' + req.body.password + '",email="' + req.body.email + '",send_n="' + state_n + '" WHERE id="' + req.body.user_id + '"');
+
+          case 5:
             data = _context4.sent;
             return _context4.abrupt("return", res.status(200).send({
               type: "ok",
-              msg: 'Пользователь удачно удален'
+              msg: 'Пользователь удачно изменен'
             }));
 
-          case 7:
-            _context4.prev = 7;
-            _context4.t0 = _context4["catch"](0);
+          case 9:
+            _context4.prev = 9;
+            _context4.t0 = _context4["catch"](2);
             return _context4.abrupt("return", res.status(401).send({
               status: false,
               message: _context4.t0.message
             }));
 
-          case 10:
+          case 12:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 7]]);
+    }, _callee4, null, [[2, 9]]);
   }));
 
   return function (_x7, _x8) {
     return _ref4.apply(this, arguments);
   };
 }());
+router.post('/userdelete',
+/*#__PURE__*/
+function () {
+  var _ref5 = (0, _bluebird.coroutine)(
+  /*#__PURE__*/
+  _regenerator["default"].mark(function _callee5(req, res) {
+    var data;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return _db["default"].query('UPDATE users set delete_status=1 WHERE id="' + req.body.user_id + '"');
+
+          case 3:
+            data = _context5.sent;
+            return _context5.abrupt("return", res.status(200).send({
+              type: "ok",
+              msg: 'Пользователь удачно удален'
+            }));
+
+          case 7:
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](0);
+            return _context5.abrupt("return", res.status(401).send({
+              status: false,
+              message: _context5.t0.message
+            }));
+
+          case 10:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 7]]);
+  }));
+
+  return function (_x9, _x10) {
+    return _ref5.apply(this, arguments);
+  };
+}());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;

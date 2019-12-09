@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -21,30 +21,47 @@ var fs = require('fs');
 
 var config = require('../config');
 
+var moment = require('moment');
+
+moment.locale('kk');
+var sign_in_date = moment().format('YYYY-DD-MM h:mm:ss');
+
 var bcrypt = require('bcryptjs');
 
-var router = (0, _express.Router)();
+var router = (0, _express.Router)(); // const signInDay = (id)=>{
+//     return new Promise(function(resolve,reject){
+//         db.query(', function (err, result) {
+//                 if (err){
+//                     console.log('Error when updating facts sign_in_date '+err);
+//                     return false;
+//                 }
+//                 console.log('update','true');
+//                 return true;
+//         });
+//     });
+// }
+
 router.post('/login',
 /*#__PURE__*/
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
-    var ok, data, token;
-    return _regenerator.default.wrap(function _callee$(_context) {
+  _regenerator["default"].mark(function _callee(req, res) {
+    var ok, data, token, signInDate;
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             ok = false;
             _context.prev = 1;
             _context.next = 4;
-            return _db.default.query('SELECT id,login,password,role,id_branch,delete_status FROM users WHERE delete_status = 0 and login="' + req.body.login + '"');
+            return _db["default"].query('SELECT id,login,password,role,sign_in_date,id_branch,delete_status FROM users WHERE delete_status = 0 and login="' + req.body.login + '"');
 
           case 4:
             data = _context.sent;
 
             if (!(data.length > 0)) {
-              _context.next = 14;
+              _context.next = 18;
               break;
             }
 
@@ -59,7 +76,7 @@ function () {
             }));
 
           case 10:
-            token = _jsonwebtoken.default.sign({
+            token = _jsonwebtoken["default"].sign({
               user_id: data[0].id,
               login: data[0].login,
               id_branch: data[0].id_branch,
@@ -67,39 +84,50 @@ function () {
             }, config.secret, {
               expiresIn: '1d'
             });
+            _context.next = 13;
+            return _db["default"].query('UPDATE users SET sign_in_date="' + sign_in_date + '" where id=' + data[0].id);
+
+          case 13:
+            signInDate = _context.sent;
+
+            if (!signInDate) {
+              _context.next = 16;
+              break;
+            }
+
             return _context.abrupt("return", res.json({
               token: token,
               type: 'ok'
             }));
 
-          case 12:
-            _context.next = 15;
+          case 16:
+            _context.next = 19;
             break;
 
-          case 14:
+          case 18:
             return _context.abrupt("return", res.status(200).send({
               type: 'error',
               msg: 'Пользователь не найден'
             }));
 
-          case 15:
-            _context.next = 20;
+          case 19:
+            _context.next = 24;
             break;
 
-          case 17:
-            _context.prev = 17;
+          case 21:
+            _context.prev = 21;
             _context.t0 = _context["catch"](1);
             return _context.abrupt("return", res.status(200).send({
               status: false,
               message: _context.t0.message
             }));
 
-          case 20:
+          case 24:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 17]]);
+    }, _callee, null, [[1, 21]]);
   }));
 
   return function (_x, _x2) {
@@ -111,8 +139,8 @@ router.post('/usercheck',
 function () {
   var _ref2 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+  _regenerator["default"].mark(function _callee2(req, res) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -137,4 +165,4 @@ function () {
   };
 }());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;

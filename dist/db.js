@@ -5,17 +5,17 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _mysql = _interopRequireDefault(require("mysql"));
 
 var util = require('util');
 
-var db = _mysql.default.createConnection({
-  host: '10.10.102.209',
+var db = _mysql["default"].createConnection({
+  host: 'localhost',
   user: 'root',
-  password: '123456',
-  database: 'sitcenter_sber'
+  password: 'root',
+  database: 'sitcenter_kgd'
 }); // connect to database
 
 
@@ -28,4 +28,4 @@ db.connect(function (err) {
 });
 db.query = util.promisify(db.query);
 var _default = db;
-exports.default = _default;
+exports["default"] = _default;

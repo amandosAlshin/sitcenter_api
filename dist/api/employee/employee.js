@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -34,9 +34,9 @@ router.post('/employee_list',
 function () {
   var _ref = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(req, res) {
+  _regenerator["default"].mark(function _callee(req, res) {
     var where, branches, data;
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -54,7 +54,7 @@ function () {
             }
 
             _context.next = 5;
-            return _db.default.query('SELECT `id`,`F_ID`,`F_NAME`,`F_PATRONIMIC`,`F_SURNAME`,`F_WORK_NAME`,`startTime`,`F_BRANCH_ID`,`F_DESCR` FROM employee_list ' + where + '');
+            return _db["default"].query('SELECT `id`,`F_ID`,`F_NAME`,`F_PATRONIMIC`,`F_SURNAME`,`F_WORK_NAME`,`startTime`,`F_BRANCH_ID`,`F_DESCR` FROM employee_list ' + where + '');
 
           case 5:
             data = _context.sent;
@@ -104,9 +104,9 @@ router.post('/employee_group_add',
 function () {
   var _ref2 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(req, res) {
+  _regenerator["default"].mark(function _callee2(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -123,7 +123,7 @@ function () {
           case 2:
             _context2.prev = 2;
             _context2.next = 5;
-            return _db.default.query('INSERT INTO employee_group (name,parent_id) values ("' + req.body.name + '",0)');
+            return _db["default"].query('INSERT INTO employee_group (name,parent_id) values ("' + req.body.name + '",0)');
 
           case 5:
             data = _context2.sent;
@@ -157,15 +157,15 @@ router.post('/employee_group_list',
 function () {
   var _ref3 = (0, _bluebird.coroutine)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(req, res) {
+  _regenerator["default"].mark(function _callee3(req, res) {
     var data;
-    return _regenerator.default.wrap(function _callee3$(_context3) {
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
             _context3.next = 3;
-            return _db.default.query('SELECT `id`,`name`,`parent_id` FROM employee_group');
+            return _db["default"].query('SELECT `id`,`name`,`parent_id` FROM employee_group');
 
           case 3:
             data = _context3.sent;
@@ -211,4 +211,4 @@ function () {
   };
 }());
 var _default = router;
-exports.default = _default;
+exports["default"] = _default;

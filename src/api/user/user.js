@@ -21,7 +21,7 @@ router.use(function authCheck(req, res, next) {
 
 router.post('/userlist', async (req, res) => {
   try {
-    const data = await db.query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date,ins_by_id FROM users WHERE delete_status=0');
+    const data = await db.query('SELECT id,login,password,sign_in_date,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date,ins_by_id FROM users WHERE delete_status=0');
     if(data.length>0){
       return res.status(200).send({ type: "ok", data: data });
     }else{
@@ -57,13 +57,17 @@ router.post('/useradd',  async (req, res) => {
       .status(200)
       .send({ type: "error", msg: 'Не получен отделение' });
   }
+  let state_n = 0;
+  if(req.body.state_n){
+    state_n = 1;
+  }
   try {
     const ins_date = moment().format('YYYY-DD-MM h:mm:ss');
     if(req.body.role === 0){
       const data = await db.query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("'+req.body.login+'","'+req.body.password+'",'+
                     '"'+req.body.role+'","","'+ins_date+'","'+req.user.user_id+'")');
     }else{
-      const data = await db.query('INSERT INTO users (login,password,role,id_branch,ins_date,ins_by_id) values ("'+req.body.login+'","'+req.body.password+'",'+
+      const data = await db.query('INSERT INTO users (login,password,email,send_n,role,id_branch,ins_date,ins_by_id) values ("'+req.body.login+'","'+req.body.password+'","'+req.body.email+'","'+state_n+'",'+
                     '"'+req.body.role+'","'+req.body.id_branch+'","'+ins_date+'","'+req.user.user_id+'")');
     }
     return res.status(200).send({ type: "ok", msg: 'Пользователь удачно добавлен' });
@@ -76,7 +80,7 @@ router.post('/useradd',  async (req, res) => {
 
 router.post('/userinfo', async (req, res) => {
     try {
-      const data = await db.query('SELECT id,login,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date FROM users WHERE id="'+req.body.user_id+'"');
+      const data = await db.query('SELECT id,login,email,send_n,password,role,id_branch, DATE_FORMAT(ins_date,"%d.%m.%Y") as ins_date FROM users WHERE id="'+req.body.user_id+'"');
       if(data.length>0){
         return res.status(200).send({ type: "ok", data: data });
       }else{
@@ -87,6 +91,21 @@ router.post('/userinfo', async (req, res) => {
         .status(401)
         .send({ status: false, message: err.message });
     }
+});
+router.post('/useredit',async (req, res) => {
+  let state_n = 0;
+
+  if(req.body.send_n === "true"){
+      state_n = 1;
+  }
+  try {
+    const data = await db.query('UPDATE users set login="'+req.body.login+'",password="'+req.body.password+'",email="'+req.body.email+'",send_n="'+state_n+'" WHERE id="'+req.body.user_id+'"');
+    return res.status(200).send({ type: "ok", msg: 'Пользователь удачно изменен'});
+  }catch(err){
+    return res
+      .status(401)
+      .send({ status: false, message: err.message });
+  }
 });
 router.post('/userdelete',async (req, res) => {
   try {

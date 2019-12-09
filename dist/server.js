@@ -12,26 +12,26 @@ var _bodyParser = _interopRequireDefault(require("body-parser"));
 
 var _api = require("./api");
 
-var app = (0, _express.default)();
-var port = 3000;
+var app = (0, _express["default"])();
+var port = 4000;
 
 var config = require('./api/config');
 
 var cors = require('cors');
 
-app.set('views', _path.default.join(__dirname, 'views'));
+app.set('views', _path["default"].join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(_express.default.static(_path.default.join(__dirname, 'client/build')));
-app.use(_bodyParser.default.urlencoded({
+app.use(_express["default"]["static"](_path["default"].join(__dirname, 'client/build')));
+app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
-app.use(_bodyParser.default.json()); // parse form data client
+app.use(_bodyParser["default"].json()); // parse form data client
 
-app.use(_express.default.static(_path.default.join(__dirname, 'public')));
+app.use(_express["default"]["static"](_path["default"].join(__dirname, 'public')));
 app.get('*', function (req, res) {
-  return res.sendFile(_path.default.join(__dirname + '/client/build/index.html'));
+  return res.sendFile(_path["default"].join(__dirname + '/client/build/index.html'));
 });
-app.post('/api/*', (0, _expressJwt.default)({
+app.post('/api/*', (0, _expressJwt["default"])({
   secret: config.secret
 }), function (err, req, res, next) {
   if (err) {
@@ -41,7 +41,7 @@ app.post('/api/*', (0, _expressJwt.default)({
   }
 });
 var corsOptions = {
-  origin: 'http://127.0.0.1:3006',
+  origin: 'http://10.10.102.66:3006',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 
 };

@@ -5,7 +5,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'ssitcenter_sber',
+    database: 'sitcenter_kgd',
 });
 
 // connect to database
